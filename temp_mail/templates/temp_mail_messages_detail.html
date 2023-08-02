@@ -1,0 +1,25 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<h2>From: {{ object.from }}</h2>
+<p>Subject: {{ object.subject }}</p>
+<p>Date: {{ object.date }}</p>
+{% if object.attachments %}
+  <h3>Attachments:</h3>
+  <ul>
+    {% for attachment in object.attachments %}
+      <li>Filename: {{ attachment.filename }}</li>
+      <li>Content Type: {{ attachment.contentType }}</li>
+      <li>Size: {{ attachment.size }}</li>
+      <li><form action="" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="filename" value="{{ attachment.filename }}">
+        <button type="submit">Descargar</button>
+      </form></li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<p>Body: {{ object.body }}</p>
+<p>Text Body: {{ object.textBody }}</p>
+<p>HTML Body: {{ object.htmlBody }}</p>
+
+<a href="{% url 'messages' user_email %}">Volver al inicio</a>

@@ -1,0 +1,15 @@
+Lista de correos
+<ul>
+    {% for mail in q %}
+        Email: {{mail.email}} <br>
+        Expiración: {{mail.expiration_date}} <br>
+        Creado: {{mail.created_at | timesince }} <br>
+        <a href="{% url 'messages' mail.id %}">Ver lista de mensajes</a> <br> <br>
+
+        {% empty %}
+        No existen correos
+    {% endfor %}
+</ul>
+
+<a href="{% url 'gen' %}">Generar nuevo correo</a>
+<a href="{% url 'logout' %}">Logout</a>

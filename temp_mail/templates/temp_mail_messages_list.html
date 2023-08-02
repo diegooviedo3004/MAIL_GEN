@@ -1,0 +1,15 @@
+<script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+Lista de mensajes del correo {{mail}}
+<ul>
+    {% for message in q %}
+        Enviado por: {{message.from}} <br>
+        Sujeto: {{message.subject}} <br>
+        <a href="{% url 'messages_detail' mail.id message.id %}">Ver mensaje</a> <br><br>
+        {% empty %}
+        No existen mensajes para {{mail}}
+    {% endfor %}
+</ul>
+
+<a href="{% url 'index' %}">Volver al inicio</a>
